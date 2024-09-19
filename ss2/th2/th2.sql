@@ -1,0 +1,34 @@
+CREATE TABLE Class(
+classID INT AUTO_INCREMENT PRIMARY KEY,
+className VARCHAR(60) NOT NULL,
+startDate DATE NOT NULL,
+status BIT
+);
+
+CREATE TABLE Student(
+studentId INT AUTO_INCREMENT PRIMARY KEY ,
+studentName VARCHAR(255) NOT NULL,
+address VARCHAR(255),
+phone VARCHAR(255),
+status BIT,
+classId INT,
+FOREIGN KEY (classId) REFERENCES Class(classID)
+);
+
+CREATE TABLE Subject(
+subId INT AUTO_INCREMENT PRIMARY KEY,
+subName VARCHAR(30) NOT NULL,
+credit INT DEFAULT 1 CHECK(credit>=1),
+status BIT   DEFAULT 1
+);
+
+CREATE TABLE Mark(
+markId INT AUTO_INCREMENT PRIMARY KEY,
+subjectId INT,
+FOREIGN KEY(studentId) REFERENCES Subject(subId),
+studentId INT,
+FOREIGN KEY(studentId) REFERENCES Student(studentId),
+mark DOUBLE DEFAULT 0 CHECK (Mark BETWEEN 0 AND 100),
+examTimes INT DEFAULT 1
+);
+

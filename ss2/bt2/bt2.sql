@@ -1,0 +1,27 @@
+CREATE TABLE customers(
+cid INT PRIMARY KEY AUTO_INCREMENT,
+cName VARCHAR(255),
+cAge INT
+);
+
+CREATE TABLE orders(
+oId INT PRIMARY KEY AUTO_INCREMENT,
+cId INT NOT NULL,
+FOREIGN KEY (cId) REFERENCES customers(cid),
+oDate DATETIME ,
+oTotalPrice DOUBLE
+);
+
+CREATE TABLE products(
+pId INT PRIMARY KEY AUTO_INCREMENT,
+pName VARCHAR(255),
+pPrice DOUBLE
+);
+
+CREATE TABLE orderDetail(
+oId INT,
+FOREIGN KEY (oId) REFERENCES orders(oId),
+pId INT,
+FOREIGN KEY (pId) REFERENCES products(pId),
+odQuantity INT
+);
